@@ -5,6 +5,7 @@
 
 ## To Do:
 - Dynamic, user defined heroes
+- Use a library for more robust/fuzzy string matching to account for spelling mistakes in titles
 - Add articles to database for later access
 - Change from terminal output to some other form of web notifications
 - Set up so can be run as a script on a server/RPi
