@@ -3,7 +3,6 @@
 ##--------------------------------------------------------------------------------------------------------##
 
 import praw
-import sys
 
 # Strings for matching heroes of interest in post titles
 reinStrings = ['Reinhardt', 'Rein']
@@ -35,10 +34,14 @@ class Guide:
 	def isInCategory(self, categoryTuple):
 		return categoryTuple == self.includedHeroes
 
-def getUserHeroes():
+# Gets user input and uses that to define the matching string lists
+def getUserHeroesFromInput():
 
 	matchingStringLists = []
-	userInput = int(input("Preset number: "))
+	try:
+		userInput = int(input("Preset number: "))
+	except:
+		userInput = 0
 
 	if userInput > 3 or userInput < 1:
 		print("Invalid selection, defaulting to 1")
@@ -70,23 +73,27 @@ def printCategoryTitle(heroes):
 def printGenericTitle(titleString):
 	print('\x1b[1;35;40m' + titleString + '\n' + '\x1b[0m')
 
+def displayProgramTitle():
+	printGenericTitle("OWU scraper")
+	print("-----------")
+	print("Please select hero preset:")
+	print("1) Main tanks: Rein, Orisa, Winston")
+	print("2) Healers: Mercy, Zen, Ana")
+	print("3) DPS: Soldier, Symmetra")
+	print("-----------")
+
+
 ##--------------------------------------------------------------------------------------------------------##
 ##------------------------------------------Functionality-------------------------------------------------##
 ##--------------------------------------------------------------------------------------------------------##
 
-printGenericTitle("OWU scraper")
-print("-----------")
-print("Please select hero preset:")
-print("1) Main tanks: Rein, Orisa, Winston")
-print("2) Healers: Mercy, Zen, Ana")
-print("3) DPS: Soldier, Symmetra")
-print("-----------")
+displayProgramTitle()
 
 # Use praw API to interface with reddit and fetch the new posts from reddit.com/overwatchuniversity
 reddit = praw.Reddit('bot1', user_agent='<Python:reddyBot:v1.0 (by /u/reddyBootboot)')
 newPosts = reddit.subreddit('overwatchuniversity').new()
 
-heroStringLists = getUserHeroes()
+heroStringLists = getUserHeroesFromInput()
 
 todaysGuides = []
 todaysHeroCombinations = set()
