@@ -9,7 +9,7 @@ from owuStrings import *
 ##-------------------------------------------Classes/Functions--------------------------------------------##
 ##--------------------------------------------------------------------------------------------------------##
 
-# The guide object representing a given guide or post on the OWU subreddit
+# The guide class represents a given guide or post on the OWU subreddit
 class Guide:
 
 	def __init__(self, title, includedHeroes, url):
@@ -26,6 +26,7 @@ class Guide:
 		return categoryTuple == self.includedHeroes
 
 # Gets user input and uses that to define the matching string lists
+# For ease of use heroes are divided into 3 pre-set categories
 def getUserHeroesFromInput():
 
 	matchingStringLists = []
@@ -40,10 +41,13 @@ def getUserHeroesFromInput():
 		return matchingStringLists
 
 	if userInput == 1:
+		# Main tanks: Rein, Orisa, Winston
 		matchingStringLists.extend([reinStrings, orisaStrings, winstonStrings])
 	elif userInput == 2:
+		# Healers: Mercy, Zen, Ana
 		matchingStringLists.extend([mercyStrings, anaStrings, zenStrings])
 	elif userInput == 3: 
+		# DPS: Soldier, Symmetra
 		matchingStringLists.extend([soldierStrings, symmetraStrings])
 	return matchingStringLists
 
